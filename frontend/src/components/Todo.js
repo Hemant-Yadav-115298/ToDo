@@ -11,15 +11,16 @@ function Todo() {
     const [newStatus, setNewStatus] = useState("");
     const [newDeadline, setNewDeadline] = useState("");
     const [editedDeadline, setEditedDeadline] = useState("");
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
     // Fetch tasks from database
     useEffect(() => {
-        axios.get('http://127.0.0.1:3001/getTodoList')
+        axios.get(`${API_URL}/getTodoList`)
             .then(result => {
                 setTodoList(result.data)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [API_URL])
 
     // Function to toggle the editable state for a specific row
     const toggleEditable = (id) => {
@@ -46,7 +47,7 @@ function Todo() {
             return;
         }
 
-        axios.post('http://127.0.0.1:3001/addTodoList', { task: newTask, status: newStatus, deadline: newDeadline })
+        axios.post(`${API_URL}/addTodoList`, { task: newTask, status: newStatus, deadline: newDeadline })
             .then(res => {
                 console.log(res);
                 window.location.reload();
@@ -69,7 +70,7 @@ function Todo() {
         }
 
         // Updating edited data to the database through updateById API
-        axios.post('http://127.0.0.1:3001/updateTodoList/' + id, editedData)
+        axios.post(`${API_URL}/updateTodoList/${id}`, editedData)
             .then(result => {
                 console.log(result);
                 setEditableId(null);
@@ -84,7 +85,7 @@ function Todo() {
 
     // Delete task from database
     const deleteTask = (id) => {
-        axios.delete('http://127.0.0.1:3001/deleteTodoList/' + id)
+        axios.delete(`${API_URL}/deleteTodoList/${id}`)
             .then(result => {
                 console.log(result);
                 window.location.reload();

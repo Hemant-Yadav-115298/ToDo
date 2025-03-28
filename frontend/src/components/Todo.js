@@ -11,7 +11,7 @@ function Todo() {
     const [newStatus, setNewStatus] = useState("");
     const [newDeadline, setNewDeadline] = useState("");
     const [editedDeadline, setEditedDeadline] = useState("");
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
     // Fetch tasks from database
     useEffect(() => {

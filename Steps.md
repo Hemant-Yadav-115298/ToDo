@@ -157,3 +157,7 @@ docker-compose up --build
 ```bash
 docker exec todo-frontend printenv REACT_APP_API_URL
 ```
+
+server: {
+		allowedHosts: true
+	},
